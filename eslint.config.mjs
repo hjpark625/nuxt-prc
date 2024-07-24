@@ -6,4 +6,3 @@ export default withNuxt({
     '@typescript-eslint/no-unused-vars': 'warn'
   }
 })
-// Your custom configs here
