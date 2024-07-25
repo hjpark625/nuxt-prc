@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  typescript: { strict: true },
+  typescript: { typeCheck: true, strict: true, builder: 'vite' },
   modules: ['@nuxt/eslint'],
   app: {
     head: {
