@@ -1,6 +1,8 @@
 <template>
   <!-- <ClientOnly fallback-tag="span" fallback="Loading Contents..."> -->
-  <CounterContainer />
+  <NuxtLayout name="default">
+    <CounterContainer />
+  </NuxtLayout>
   <!-- </ClientOnly> -->
 </template>
 
