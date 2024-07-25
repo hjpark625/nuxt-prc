@@ -6,17 +6,9 @@
         <span>{{ item }}</span>
       </div>
     </template>
-
     <template #content>
       <div>HelloWorld!</div>
-      <button type="button" @click="toggleModal">open Modal</button>
     </template>
-
-    <Teleport to="body">
-      <div v-if="isOpen">
-        <div>Teleport to #teleports</div>
-      </div>
-    </Teleport>
   </NuxtLayout>
 </template>
 
@@ -31,15 +23,6 @@ useHead({
     { name: 'og:description', content: `Welcome to ${params.id} Page` }
   ]
 })
-
-// const isOpen = ref(false)
-const isOpen = useState(() => false)
-
-function toggleModal(e: Event) {
-  //   e.stopPropagation()
-  e.preventDefault()
-  isOpen.value = !isOpen.value
-}
 
 // useSeoMeta({
 //   title: `${params.id} Page`,

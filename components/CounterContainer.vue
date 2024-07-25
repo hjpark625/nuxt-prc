@@ -4,7 +4,7 @@
     <h1 class="title">test is: {{ test }}</h1>
     <ClientOnly>
       <Teleport to="#modal">
-        <MainModal :is-open="isOpen" @close-modal="modalHandler" />
+        <MainModal :is-open="isOpen" @close-modal="isOpen = $event" />
       </Teleport>
     </ClientOnly>
     <ClientOnly fallback-tag="div" fallback="Button Loading...">
@@ -20,16 +20,11 @@ import MainModal from '~/components/MainModal.vue'
 
 const count = ref(0)
 const isOpen = ref(false)
-const test = useState('count', () => 0)
+const test = useCount()
 
 function openModal(e: Event) {
   e.stopPropagation()
   isOpen.value = true
-}
-function modalHandler(emitVal: boolean) {
-  console.log(emitVal)
-
-  isOpen.value = emitVal
 }
 
 function increment() {
@@ -41,10 +36,6 @@ function decrement() {
   count.value -= 1
   test.value -= 1
 }
-
-onUpdated(() => {
-  console.log(count.value)
-})
 </script>
 
 <style lang="scss" scoped>
