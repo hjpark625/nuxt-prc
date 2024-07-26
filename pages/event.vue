@@ -1,5 +1,7 @@
 <template>
-  <EventList />
+  <ClientOnly>
+    <EventList />
+  </ClientOnly>
 </template>
 
 <script lang="ts" setup>
