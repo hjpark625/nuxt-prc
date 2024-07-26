@@ -14,9 +14,11 @@
 
   <div v-else class="event-list-wrapper">
     <div v-for="(event, index) of eventData" :key="index" class="event-list-item">
-      <div>eventId is: {{ event.eventId }}</div>
-      <div>eventName is: {{ event.eventName }}</div>
-      <NuxtImg :src="event.mainImg" :alt="event.eventName" />
+      <NuxtLink :to="`/event/${event.eventId}`">
+        <div>eventId is: {{ event.eventId }}</div>
+        <div>eventName is: {{ event.eventName }}</div>
+        <NuxtImg :src="event.mainImg" :alt="event.eventName" />
+      </NuxtLink>
     </div>
   </div>
 </template>
