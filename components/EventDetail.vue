@@ -62,6 +62,25 @@ const {
 
 if (status.value === 'success' && response.value) {
   eventDetail.value = response.value.data
+  useHead({
+    title: `${response.value.data.eventName}`,
+    htmlAttrs: {
+      lang: 'ko'
+    },
+    link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }]
+  })
+  useSeoMeta({
+    description: response.value.data.describe || '-',
+    ogTitle: `${response.value.data.eventName}`,
+    ogDescription: response.value.data.describe || '-',
+    ogImage: response.value.data.mainImg,
+    ogUrl: response.value.data.detailUrl,
+    ogType: 'website',
+    twitterTitle: `${response.value.data.eventName}`,
+    twitterDescription: response.value.data.describe || '-',
+    twitterImage: response.value.data.mainImg,
+    twitterCard: 'summary_large_image'
+  })
 }
 </script>
 
