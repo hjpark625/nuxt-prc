@@ -67,7 +67,7 @@ if (status.value === 'success' && response.value) {
     htmlAttrs: {
       lang: 'ko'
     },
-    link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }]
+    link: [{ rel: 'icon', type: 'image/png', href: '/favicon.ico' }]
   })
   useSeoMeta({
     description: response.value.data.describe || '-',
