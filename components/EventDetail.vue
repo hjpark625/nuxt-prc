@@ -97,9 +97,5 @@ if (status.value === 'success' && response.value) {
     font-size: 1rem;
     margin-bottom: 10px;
   }
-  .event-img {
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
 }
 </style>
