@@ -24,23 +24,9 @@
 </template>
 
 <script lang="ts" setup>
+import { getEventList } from '~/api/client/events'
 import type { AsyncDataRequestStatus } from 'nuxt/app'
-
-interface Event {
-  categorySeq: number
-  detailUrl: string
-  endDate: string
-  eventId: number
-  eventName: string
-  mainImg: string
-  period: string
-  startDate: string
-}
-
-interface Response<T> {
-  data: T[]
-  totalCount: number
-}
+import type { Event } from '~/api/client/events'
 
 const limit = ref(10)
 const page = ref(1)
@@ -54,16 +40,8 @@ const error = ref<Error | null>(null)
 async function fetchEventList() {
   status.value = 'pending'
   try {
-    const response = await $fetch<Response<Event>>('http://43.203.65.70/event/list', {
-      method: 'GET',
-      params: {
-        limit: limit.value,
-        offset: (page.value - 1) * limit.value
-      }
-    })
-
-    status.value = 'success'
-    return response
+    const data = await getEventList({ limit: limit.value, page: page.value })
+    return data
   } catch (err: unknown) {
     status.value = 'error'
     throw new Error(err as string)
@@ -73,20 +51,20 @@ async function fetchEventList() {
 }
 
 const data = await fetchEventList()
-eventData.value = data.data
+eventData.value = data
 
 async function prev() {
   if (page.value > 1) {
     page.value--
     const data = await fetchEventList()
-    eventData.value = data.data
+    eventData.value = data
   }
 }
 
 async function next() {
   page.value++
   const data = await fetchEventList()
-  eventData.value = data.data
+  eventData.value = data
 }
 </script>
 
