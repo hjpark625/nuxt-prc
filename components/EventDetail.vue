@@ -19,46 +19,15 @@
 </template>
 
 <script lang="ts" setup>
-interface EventDetail {
-  eventId: number
-  categorySeq: number
-  guSeq: number | null
-  eventName: string
-  period: string
-  place: string
-  orgName: string
-  useTarget: string
-  ticketPrice: string | null
-  player: string | null
-  describe: string | null
-  etcDesc: string | null
-  homepageLink: string
-  mainImg: string
-  regDate: Date
-  isPublic: boolean
-  startDate: Date
-  endDate: Date
-  theme: string | null
-  latitude: number
-  longitude: number
-  isFree: boolean
-  detailUrl: string
-}
-interface EventDetailResponse<T> {
-  data: T
-}
+import type { EventDetail } from '~/api/types/event'
 
 const props = defineProps<{ eventId: string | string[] }>()
 
 const eventDetail = useState<EventDetail | null>('eventDetail', () => null)
 
-const {
-  data: response,
-  error,
-  status
-} = await useFetch<EventDetailResponse<EventDetail>>(`http://43.203.65.70/event/detail/${props.eventId}`, {
-  method: 'GET'
-})
+const { $eventServerApi } = useNuxtApp()
+
+const { data: response, error, status } = await $eventServerApi.getEventDetail(Number(props.eventId))
 
 if (status.value === 'success' && response.value) {
   eventDetail.value = response.value.data
